@@ -1,0 +1,20 @@
+{
+    "topic": "kline.5.TONUSDT",
+    "data": [
+        {
+            "start": 1721717700000,
+            "end": 1721717999999,
+            "interval": "5",
+            "open": "6.8508",
+            "close": "6.8588",
+            "high": "6.8588",
+            "low": "6.85",
+            "volume": "11676.5",
+            "turnover": "80018.06976",
+            "confirm": false,
+            "timestamp": 1721717805025
+        }
+    ],
+    "ts": 1721717805025,
+    "type": "snapshot"
+}
