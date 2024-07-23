@@ -9,11 +9,14 @@ class ByBitMethods:
         self.interval = interval
         self.symbol = symbol
         self.category = category
+        self.stream_type = ''
 
 
     # WebSocket method
 
     def ws_stream(self, callback):
+        self.stream_type = 'websocket'
+
         ws = WebSocket(
             testnet=False,
             channel_type=self.category,
@@ -25,13 +28,17 @@ class ByBitMethods:
             callback=callback
         )
 
+        return self.stream_type
+
 
     # HTTP method   
 
     def http_query(self):
+        self.stream_type = 'http'
+
         session = HTTP()
         http_response = session.get_kline(category=self.category, symbol=self.symbol, interval=self.interval,)
 
         # print(http_response)
 
-        return http_response['result']['list']
+        return self.stream_type, http_response['result']['list']

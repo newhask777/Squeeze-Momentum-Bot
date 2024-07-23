@@ -8,10 +8,10 @@ def get_klines(message):
 
 
 ws = ByBitMethods(symbol='TONUSDT')
-ws.ws_stream(get_klines)
-# http = ws.http_query()
+# ws = ws.ws_stream(get_klines)
+http = ws.http_query()
 
 
-ind = Indicators(ws)
+ind = Indicators(http)
 ind.sma_20()
 
