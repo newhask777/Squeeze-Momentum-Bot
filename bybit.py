@@ -21,8 +21,8 @@ class ByBitMethods:
         Base.metadata.create_all(bind=engine)
         # db = SessionLocal()
 
-    # WebSocket method
 
+    # WebSocket method
     def ws_stream(self):
         self.stream_type = 'websocket'
 
@@ -43,7 +43,7 @@ class ByBitMethods:
 
             if self.save_ws:
                 print('save ws')
-                
+
             if self.save_http:
                 print('save http')
 
@@ -55,9 +55,7 @@ class ByBitMethods:
             print(e)
 
 
-
     # HTTP method   
-
     def http_query(self):
         self.stream_type = 'http'
 
