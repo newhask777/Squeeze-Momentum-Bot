@@ -3,27 +3,36 @@ import pandas as pd
 import plotly.graph_objects as go
 from bybit import ByBitMethods
 
+from pybit.unified_trading import WebSocket, HTTP
+from pybit import exceptions
+import time
+
+from db.conn import engine, SessionLocal, Base
+from db.models import WsCandle, HttpCandle
+
 
 
 class Indicators(ByBitMethods):
 
-    def __init__(self, bybit_method=None):
+    def __init__(self, bybit_method, *args, **kwargs):
+        super(Indicators, self).__init__(*args, **kwargs)
         self.bybit_method = bybit_method
 
         if self.bybit_method == 'websocket':
-
             print(self.bybit_method)
-            print('websocket')
+            self.ws_stream()
+            
 
         elif self.bybit_method[0] == 'http':
-
             print(self.bybit_method)
             print('http')
+            self.http_query
 
     # Get 20 sma
 
     def sma_20(self):
         print(self.bybit_method)
+        
        
         
 
