@@ -1,6 +1,8 @@
 from pybit.unified_trading import WebSocket, HTTP
 from pybit import exceptions
+import pandas as pd
 import time
+import json
 
 from sqlalchemy import event
 
@@ -27,15 +29,11 @@ class ByBitMethods:
         time.sleep(5)
         self.stream_type = 'websocket'
 
-        if self.save_ws:
-            print('save ws')
-
-
-        def get_klines(message):
+        def save_to_db(message):
+            time.sleep(5)
             print(message)
 
             try:
-
                 for m in message['data']:
                     kline_info = WsCandle()
 
@@ -60,7 +58,7 @@ class ByBitMethods:
             ws.kline_stream(
                 symbol=self.symbol,
                 interval=self.interval,
-                callback=get_klines
+                callback=save_to_db
             )
 
            
