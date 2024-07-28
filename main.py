@@ -4,21 +4,27 @@ from pybit.unified_trading import WebSocket, HTTP
 import json
 import time
 
-def get_klines(message):
-    print(message)
+from db.conn import engine, SessionLocal, Base
+from db.models import WsCandle, HttpCandle
+
+Base.metadata.create_all(bind=engine)
+db = SessionLocal()
 
 
 def main():
     ws = 'websocket'
-    # http = 'http'
-    ind = Indicators(ws, symbol='TONUSDT', save_ws=True, save_http=True)
+    _http = 'http'
+    ind = Indicators(_http, symbol='TONUSDT', save_ws=False, save_http=True, db=db)
     ind.sma_20()
 
-
-if __name__ == '__main__':
     while True:
         main()
         time.sleep(5)
+
+
+if __name__ == '__main__':
+    main()
+        
         
 
 

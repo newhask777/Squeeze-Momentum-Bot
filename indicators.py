@@ -3,22 +3,29 @@ import pandas as pd
 import plotly.graph_objects as go
 from bybit import ByBitMethods
 
+from db import models
+from db.conn import engine, SessionLocal, Base
+
 
 class Indicators(ByBitMethods):
 
-    def __init__(self, bybit_method, *args, **kwargs):
+   
+    def __init__(self, bybit_method: str, bybit_methods: dict=None, *args, **kwargs):
         super(Indicators, self).__init__(*args, **kwargs)
         self.bybit_method = bybit_method
 
+        
         if self.bybit_method == 'websocket':
-            print(self.bybit_method)
             self.ws_stream()
             
 
-        elif self.bybit_method[0] == 'http':
-            print(self.bybit_method)
-            print('http')
-            self.http_query
+        if self.bybit_method == 'http':
+            self.http_query()
+
+
+        if bybit_methods and not bybit_method:
+            print(bybit_methods)
+    
 
 
     # Get 20 sma
