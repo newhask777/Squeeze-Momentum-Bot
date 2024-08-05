@@ -10,6 +10,9 @@ class WsCandle(Base):
     __tablename__ = "ws"
 
     id = Column(Integer, primary_key=True, index=True)
+    stamp = Column(String(255))
+    # stamp = Column(Integer)
+    # stamp = Column(TIMESTAMP, default=datetime.datetime.now) 
     open = Column(String(255))
     high = Column(String(255))
     low = Column(String(255))

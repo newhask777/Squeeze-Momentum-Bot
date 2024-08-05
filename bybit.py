@@ -26,17 +26,22 @@ class ByBitMethods:
 
     # WebSocket method
     def ws_stream(self):
-        time.sleep(5)
         self.stream_type = 'websocket'
 
         def save_to_db(message):
-            time.sleep(5)
-            print(message)
+            # print(message)
 
             try:
                 for m in message['data']:
                     kline_info = WsCandle()
 
+                    unix_timestamp = m['timestamp']       
+                    stamp = datetime.fromtimestamp(unix_timestamp / 1000)
+                    stamp = stamp.strftime("%Y-%m-%d %H:%M:%S")
+                    # stamp = stamp.strftime("%H:%M:%S")
+                    # print(stamp)
+
+                    kline_info.stamp =  stamp
                     kline_info.open = m['open']
                     kline_info.high = m['high']
                     kline_info.low = m['low']
@@ -46,7 +51,8 @@ class ByBitMethods:
                     self.db.add(kline_info)
                     self.db.commit()
             except:
-                 print('DB ERROR')
+                print('DB ERROR')
+                # self.db.session.rollback()
 
 
         try:
@@ -73,11 +79,10 @@ class ByBitMethods:
 
     # HTTP method   
     def http_query(self):
-        time.sleep(5)
         self.stream_type = 'http'
 
         if self.save_http:
-                print('save http')
+            print('save http')
 
         session = HTTP()
         http_response = session.get_kline(category=self.category, symbol=self.symbol, interval=self.interval,)
@@ -104,6 +109,4 @@ class ByBitMethods:
             self.db.add(kline_info)
             self.db.commit()
 
-            print(http_response)
-
-        # return self.stream_type, http_response['result']['list']
+            # print(http_response)

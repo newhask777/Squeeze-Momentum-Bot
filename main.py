@@ -4,24 +4,27 @@ import json
 import time
 
 from db.conn import engine, SessionLocal, Base
-# from db.models import WsCandle, HttpCandle
+
 
 Base.metadata.create_all(bind=engine)
 db = SessionLocal()
 
+ws = 'websocket'
+_http = 'http'
+ind = Indicators(_http, symbol='TONUSDT', save_ws=True, save_http=False, db=db)
 
 def main():
-    ws = 'websocket'
-    _http = 'http'
-    ind = Indicators(ws, symbol='TONUSDT', save_ws=True, save_http=False, db=db)
+ 
     ind.sma_20()
 
-    while True:
-        time.sleep(5)
+    # while True:
+    #     time.sleep(5)
 
 
 if __name__ == '__main__':
-    main()
+    while True:
+        time.sleep(5)
+        main()
         
         
 
